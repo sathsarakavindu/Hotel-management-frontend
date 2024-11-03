@@ -1,0 +1,7 @@
+.pic-bg{
+    background-image: url("public/train.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
