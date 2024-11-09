@@ -13,6 +13,9 @@ import AdminFeedback from "../admin/feedback/feedback";
 import GalleryItems from "../admin/galleryItems/galleryItems";
 import AdminRooms from './../admin/rooms/rooms';
 import AddCategoryForm from "../admin/AddCategoryForm/addCategoryForm";
+import UpdateCategoryForm from "../admin/UpdateCategoryForm/updateCategory";
+import AddGalleryItemForm from "../admin/AddGalleryForm/addGalleryForm";
+import UpdateGalleryForm from "../admin/UpdateGalleryForm/updateGalleryForm";
 export default function AdminPage(){
     return(<>
       <div className="w-full max-h-[100vh] overflow-hidden overflow-y-hidden flex">
@@ -39,10 +42,13 @@ export default function AdminPage(){
         <Route path="/bookings" element={<AdminBooking/>}/>
         <Route path="/categories" element={<AdminCategories/>}/>
         <Route path="/add-category" element={<AddCategoryForm/>}/>
+        <Route path="/update-category" element={<UpdateCategoryForm/>}/>
         <Route path="/rooms" element={<AdminRooms/>}/>
         <Route path="/users" element={<Users/>}/>
         <Route path="/feedback" element={<AdminFeedback/>}/>
         <Route path="/gallery" element={<GalleryItems/>}/>
+        <Route path="/add-gallery-item" element={<AddGalleryItemForm/>}/>
+        <Route path="/update-gallery-item" element={<UpdateGalleryForm/>}/>
        </Routes>
 
      </div>

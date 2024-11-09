@@ -4,15 +4,25 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { getDownloadURL } from "firebase/storage";
-import { Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export default function AddCategoryForm() {
-   const [name, setName] = useState("");
-   const [price, setPrice] = useState(0);
-   const [features, setFeatures] = useState("");
-   const [description, setDescription] = useState("");
+export default function UpdateCategoryForm() {
+   const location = useLocation();
+
+   if(location.state == null){
+     window.location.href = "/admin/categories"
+      
+   }
+
+   const [name, setName] = useState(location.state.category_name);
+   const [price, setPrice] = useState(location.state.price);
+   const [features, setFeatures] = useState(location.state.features.join(","));
+   const [description, setDescription] = useState(location.state.description);
    const [image, setImage] = useState(null);
    const [isLoading, setIsLoading] = useState(false);
+
+   
+   console.log(location.state);
 
    const token = localStorage.getItem("token");
 
@@ -30,33 +40,63 @@ export default function AddCategoryForm() {
     const featuresArray = features.split(',');
     console.log(featuresArray);
 
+    if(image == null){
+      console.log("Image is null");
+      const categoryInfo = {
+         description: description,
+         price: price,
+         features:featuresArray,
+         image: location.state.image
+        };
+
+        axios.put(import.meta.env.VITE_BACKEND_URL + "/api/category/" + name, 
+         categoryInfo,
+         {
+            headers: {
+               Authorization: "Bearer " + token,
+            },
+         }
+        ).then((res)=>{
+         console.log(res);
+         setIsLoading(false);
+         toast.success("Category was successfully updated..!");
+          window.location.href = "/admin/categories"
+        }).catch((err)=>{
+         console.log(err);
+        })
+        
+    }
+    else{
+
       uploadMedia(image).then((snapshot)=>{
+         console.log("Image is not null");
         getDownloadURL(snapshot.ref).then((url)=>{
-            console.log(url);
+           
             const categoryInfo = {
-                
-                    category_name: name,
-                    description: description,
                     price: price,
                     features:featuresArray,
-                    image: url
-                  
+                    description: description,
+                    image: url,  
             };
 
-            axios.post(import.meta.env.VITE_BACKEND_URL + "/api/category", categoryInfo, {
+            axios.put(import.meta.env.VITE_BACKEND_URL + "/api/category/" + name, 
+               categoryInfo, 
+               {
                 headers:{
-                    Authorization: "Bearer " + token
-                }
-            }).then((res)=>{
+                    Authorization: "Bearer " + token,
+                },
+               }
+         ).then((res)=>{
                 console.log(res);
                 setIsLoading(false);
-                toast.success("Category was successfully added..!");
-                Navigate("/admin/gallery");
-               }).catch(()=>{
-               toast.error("Category can;t be added");
+                toast.success("Category was successfully updated..!");
+              window.location.href = "/admin/categories"
+            }).catch(()=>{
+               toast.error("Category can't be updated.");
             })
         })
       })
+   }
    };
 
    return (
@@ -67,6 +107,7 @@ export default function AddCategoryForm() {
             <label className="block mb-2">
                Category Name:
                <input
+               disabled
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -124,7 +165,7 @@ export default function AddCategoryForm() {
                 {
                     isLoading?
                     <div className="border-t-2 border-t-white w-[20px] min-h-[20px] rounded-full animate-spin"></div>
-                : <span>Add Category</span>
+                : <span>Update Category</span>
                 }
              
             </button>
