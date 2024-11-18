@@ -55,10 +55,10 @@ else{
 );
 
    return(
-    <div className='absolute right-0 flex items-center cursor-pointer'>
-        <img className="rounded-full w-[75px] h-[75px]"
+    <div className='absolute right-0 flex items-center cursor-pointer mr-2'>
+        <img className="rounded-full w-[40px] h-[40px] lg:w-[60px] lg:h-[60px]"
         src={props.imageLink} />
-     <span className="text-white ml-[5px] mr-[10px] text-xl">{name}</span>
+     <span className="text-white ml-[5px] text-xl r">{name}</span>
     
     <button onClick={()=>{
       localStorage.removeItem("token");

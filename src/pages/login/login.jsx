@@ -1,6 +1,7 @@
 import "./login.css";
 import  { useState } from 'react';
 import axios from 'axios';
+import { Footer } from "../../components/footer/footer";
 
 export default function LoginPage(){
 
@@ -34,6 +35,7 @@ export default function LoginPage(){
     }
 
     return(
+      <>
         <div className="pic-bg w-full h-[100vh] flex justify-center items-center">
             
             <div className="w-[400px] h-[400px] backdrop-blur-md rounded-lg flex flex-col items-center relative justify-center items-center">
@@ -64,5 +66,7 @@ export default function LoginPage(){
             </div>
 
         </div>
+        <Footer/>
+        </>
     );
 }
