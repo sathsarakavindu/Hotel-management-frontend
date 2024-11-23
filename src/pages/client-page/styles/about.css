@@ -1,0 +1,19 @@
+.about-bg {
+    background-image: url("public/about.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative; /* Ensure child elements are positioned relative to this container */
+}
+
+.about-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+    z-index: 1; /* Places the overlay on top of the background image */
+}

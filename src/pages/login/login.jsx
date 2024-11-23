@@ -1,6 +1,8 @@
 import "./login.css";
 import  { useState } from 'react';
 import axios from 'axios';
+import { Footer } from "../../components/footer/footer";
+import toast from "react-hot-toast";
 
 export default function LoginPage(){
 
@@ -19,7 +21,7 @@ export default function LoginPage(){
            
             localStorage.setItem("token", res.data.token);
             console.log(res.data.type);
-           
+           toast.success("Successfully login..!");
 
             if(res.data.user.type == "customer"){
               window.location.href = "/"
@@ -29,11 +31,14 @@ export default function LoginPage(){
             }
 
            }).catch((err)=>{
-            console.log(err)
+
+            toast.error("Email or Password incorrect..!");
+            console.log(`Error is ${err}`)
         });
     }
 
     return(
+      <>
         <div className="pic-bg w-full h-[100vh] flex justify-center items-center">
             
             <div className="w-[400px] h-[400px] backdrop-blur-md rounded-lg flex flex-col items-center relative justify-center items-center">
@@ -43,7 +48,7 @@ export default function LoginPage(){
               className="w-[80%] bg-[#00000000] border border-[2px] text-white placeholder:text-white h-[50px] px-[5px] mb-[5px]" 
               defaultValue={email} 
               onChange={(e)=>{
-                console.log(e.target.value);
+               
                 setEmail(e.target.value);
               }}
             />
@@ -64,5 +69,7 @@ export default function LoginPage(){
             </div>
 
         </div>
+        <Footer/>
+        </>
     );
 }

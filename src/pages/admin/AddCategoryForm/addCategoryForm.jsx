@@ -53,7 +53,7 @@ export default function AddCategoryForm() {
                 toast.success("Category was successfully added..!");
                 Navigate("/admin/gallery");
                }).catch(()=>{
-               toast.error("Category can;t be added");
+               toast.error("Category can't be added");
             })
         })
       })

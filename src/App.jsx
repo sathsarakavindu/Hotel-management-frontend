@@ -5,8 +5,14 @@ import HomePage from './pages/client-page/homePage'
 
 import LoginPage from "./pages/login/login"
 import CategoriesPages from "./pages/client-page/category"
-import TestComponent from "./components/test/test"
+//import TestComponent from "./components/test/test"
 import { Toaster } from "react-hot-toast"
+import { UploadComponent } from "./components/test/test3"
+import About from "./pages/client-page/about"
+import CategoriesPage from "./pages/client-page/category"
+import SignUp from "./pages/register/signup"
+import FilteredCategory from "./pages/client-page/filteredCategory"
+import AddRooms from "./pages/admin/AddRoomPage/AddRoom"
 
 function App() {
  
@@ -21,10 +27,14 @@ function App() {
    <Route path="/admin/*" element={<AdminPage/>}/>
    <Route path="/login" element={<LoginPage/>}/>
    <Route path="/categories" element={<CategoriesPages/>}/>
-    <Route path="/test" element={<TestComponent/>}/>
+    <Route path="/test" element={<UploadComponent/>}/>
     <Route path="/*" element={<HomePage/>}/>
+    <Route path="/about" element={<About/>}></Route>
+    <Route path="/categories" element={<CategoriesPage/>}></Route>
+    <Route path="/login" element={<LoginPage/>}></Route>
+    <Route path="/signup" element={<SignUp/>}></Route>
+    <Route path="/filtered-category" element={<FilteredCategory/>}></Route>
    
-    
    </Routes>
    </BrowserRouter>
   )
@@ -36,6 +46,8 @@ export default App
 import Header from "./components/header/header"
 import HomePage from './pages/client-page/homePage';
 import TestComponent from './components/test/test';
+import { UploadComponent } from './components/test/test3';
+import About from './pages/client-page/about';
 
 function App() {
   return (

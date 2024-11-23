@@ -16,6 +16,7 @@ import AddCategoryForm from "../admin/AddCategoryForm/addCategoryForm";
 import UpdateCategoryForm from "../admin/UpdateCategoryForm/updateCategory";
 import AddGalleryItemForm from "../admin/AddGalleryForm/addGalleryForm";
 import UpdateGalleryForm from "../admin/UpdateGalleryForm/updateGalleryForm";
+import AddRooms from "../admin/AddRoomPage/AddRoom";
 export default function AdminPage(){
     return(<>
       <div className="w-full max-h-[100vh] overflow-hidden overflow-y-hidden flex">
@@ -49,6 +50,7 @@ export default function AdminPage(){
         <Route path="/gallery" element={<GalleryItems/>}/>
         <Route path="/add-gallery-item" element={<AddGalleryItemForm/>}/>
         <Route path="/update-gallery-item" element={<UpdateGalleryForm/>}/>
+        <Route path="/add-rooms" element={<AddRooms/>}/>
        </Routes>
 
      </div>
