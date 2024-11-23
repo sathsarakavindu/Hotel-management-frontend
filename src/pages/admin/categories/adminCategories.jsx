@@ -71,10 +71,10 @@ export default function AdminCategories(){
         onClick={()=>{
           handlePlusClick();
         }}> <FaPlus color='white'/> </button>
-      <h2 className="text-2xl font-semibold mb-4">Admin Categories</h2> 
-      <table className="w-full border-collapse border border-gray-200">
+      <h2 className="text-2xl font-semibold mb-4 text-white m-4 justify-center flex">Admin Categories</h2> 
+      <table className="w-full border-collapse border border-gray-200 mx-2">
         <thead>
-          <tr>
+          <tr className='bg-gray-800 text-white'>
             <th className="border border-gray-300 p-2">Category Name</th>
             <th className="border border-gray-300 p-2">Description</th>
             <th className="border border-gray-300 p-2">Price</th>

@@ -11,6 +11,8 @@ import { UploadComponent } from "./components/test/test3"
 import About from "./pages/client-page/about"
 import CategoriesPage from "./pages/client-page/category"
 import SignUp from "./pages/register/signup"
+import FilteredCategory from "./pages/client-page/filteredCategory"
+import AddRooms from "./pages/admin/AddRoomPage/AddRoom"
 
 function App() {
  
@@ -31,6 +33,8 @@ function App() {
     <Route path="/categories" element={<CategoriesPage/>}></Route>
     <Route path="/login" element={<LoginPage/>}></Route>
     <Route path="/signup" element={<SignUp/>}></Route>
+    <Route path="/filtered-category" element={<FilteredCategory/>}></Route>
+   
    </Routes>
    </BrowserRouter>
   )
