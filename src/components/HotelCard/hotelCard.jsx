@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -6,12 +7,79 @@ export default function HotelCard(props) {
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState("");
 
+  const token = localStorage.getItem("token");
+
   const handleFeedbackSubmit = () => {
-    toast.success("Feedback submitted!");
-    setShowFeedback(false);
-    // Here, you can send the feedback to the server
-    console.log(`Feedback for ${hotel.name}:`, feedback);
+    // toast.success("Feedback submitted!");
+    // setShowFeedback(false);
+    // console.log(`Feedback for ${hotel.room_name}:`, feedback);
+    if(token != null){
+
+       axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/',{
+        headers:{
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json"
+        }
+       }).then((result)=>{
+        const feedbackValues = {
+          User_id: result.data.user.id,
+          User_name: result.data.user.firstName,
+          Room_id: hotel.room_id,
+          Room_name: hotel.room_name,
+          Feedback: feedback,
+          Approvel: false
+        };
+        console.log(result.data.user);
+        axios.post(import.meta.env.VITE_BACKEND_URL + '/api/add-feedback',feedbackValues,{
+         headers:{
+          Authorization: "Bearer " + token
+         }
+        }).then((values)=>{
+          // result.status(200).json({
+          //   message: "Feedback Successfully Added.", 
+          //   result: values
+          // });
+          toast.success("Feedback successfully added..!");
+          console.log(values);
+        }).catch((err)=>{
+          console.log(`Feedback can't be added. Error is ${err}`);
+        })
+       
+       }).catch((err)=>{
+        console.log(`Your error is ${err}`);
+       })
+    }
+
   };
+  /*
+    useEffect(
+   ()=>{
+     
+
+       if(token != null){
+         console.log( + token);
+         axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/',
+            {
+               headers:{
+                  Authorization: "Bearer "+token,
+                  "Content-Type": "application/json"
+               }
+            }
+         ).then(
+            (res)=>{
+                  console.log(res);
+   setName(res.data.user.firstName + " " + res.data.user.lastName);
+       setUserFound(true);
+            }
+         );
+       }
+else{
+   setName("");
+}
+   },
+   [userFound]// This is the dependency array of useEffect Hook.
+);
+  */
 
   return (
     <div className="bg-gray-200 w-[650px] h-[320px] flex rounded-lg shadow-md overflow-hidden mb-6">
@@ -28,7 +96,7 @@ export default function HotelCard(props) {
       <div className="w-2/3 p-4 flex flex-col justify-between">
         {/* Title and Description */}
         <div>
-          <h2 className="text-xl font-bold mb-2">{hotel.name}</h2>
+          <h2 className="text-xl font-bold mb-2">{hotel.room_name}</h2>
           <p className="text-gray-700 text-sm">{hotel.specialDescription}</p>
         </div>
 
@@ -70,6 +138,7 @@ export default function HotelCard(props) {
           <div className="bg-white w-[400px] rounded-lg shadow-lg p-6">
             <h2 className="text-lg font-bold mb-4">Submit Your Feedback</h2>
             <textarea
+           
               rows="5"
               className="w-full border border-gray-300 rounded-md p-2 mb-4 focus:ring-2 focus:ring-blue-500 outline-none"
               placeholder="Write your feedback here..."

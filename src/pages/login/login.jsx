@@ -20,15 +20,21 @@ export default function LoginPage(){
            ).then((res)=>{
            
             localStorage.setItem("token", res.data.token);
-            console.log(res.data.type);
-           toast.success("Successfully login..!");
+            console.log(res.data.user.disabled);
+            if(res.data.user.disabled == false){
+              toast.success("Successfully login..!");
 
-            if(res.data.user.type == "customer"){
-              window.location.href = "/"
-
-            }else if(res.data.user.type == "admin"){
-                window.location.href = "/admin"
+              if(res.data.user.type == "customer"){
+                window.location.href = "/"
+  
+              }else if(res.data.user.type == "admin"){
+                  window.location.href = "/admin"
+              }
             }
+           else if(res.data.user.disabled == true){
+            toast.error("Your account has been banned");
+            return;
+           }
 
            }).catch((err)=>{
 

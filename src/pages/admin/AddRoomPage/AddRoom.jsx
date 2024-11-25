@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function AddRooms() {
   const [roomId, setRoomId] = useState("");
+  const [roomName, setRoomName] = useState("");
   const [roomCategory, setRoomCategory] = useState("");
   //const [bookingStatus, setBookingStatus] = useState(false);
   const [specialDescription, setSpecialDescription] = useState("");
@@ -42,6 +43,7 @@ export default function AddRooms() {
 
       const roomInfo = {
         room_id: roomId,
+        room_name: roomName,
         room_category: roomCategory,
         booking_status: false,
         num_of_guests: numGuests,
@@ -85,7 +87,7 @@ export default function AddRooms() {
   };
 
   return (
-    <div className="w-full h-[100vh] flex justify-center items-center">
+    <div className="w-full h-[100vh] flex flex-col justify-center items-center m-[120px] pr-40">
       <form onSubmit={handleSubmit} className="p-6 bg-gray-100 rounded-md shadow-lg">
         <h2 className="text-2xl font-semibold mb-4">Add New Room</h2>
 
@@ -95,6 +97,17 @@ export default function AddRooms() {
             type="text"
             value={roomId}
             onChange={(e) => setRoomId(e.target.value)}
+            className="w-full p-2 border rounded mt-1"
+            placeholder="Enter Room Id"
+            required
+          />
+        </label>
+        <label className="block mb-2">
+          Room Name:
+          <input
+            type="text"
+            value={roomName}
+            onChange={(e) => setRoomName(e.target.value)}
             className="w-full p-2 border rounded mt-1"
             placeholder="Enter Room Id"
             required
