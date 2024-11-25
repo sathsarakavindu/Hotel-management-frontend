@@ -13,6 +13,7 @@ import CategoriesPage from "./pages/client-page/category"
 import SignUp from "./pages/register/signup"
 import FilteredCategory from "./pages/client-page/filteredCategory"
 import AddRooms from "./pages/admin/AddRoomPage/AddRoom"
+import AddBooking from "./pages/client-page/addBookings"
 
 function App() {
  
@@ -34,7 +35,7 @@ function App() {
     <Route path="/login" element={<LoginPage/>}></Route>
     <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/filtered-category" element={<FilteredCategory/>}></Route>
-   
+    <Route path='/add-booking' element={<AddBooking/>}/>
    </Routes>
    </BrowserRouter>
   )

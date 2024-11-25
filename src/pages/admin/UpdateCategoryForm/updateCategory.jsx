@@ -102,7 +102,7 @@ export default function UpdateCategoryForm() {
    return (
       <div className="w-full h-[100vh] flex justify-center items-center">
          <form onSubmit={handleSubmit} className="p-6 bg-gray-100 rounded-md shadow-lg">
-            <h2 className="text-2xl font-semibold mb-4">Add New Category</h2>
+            <h2 className="text-2xl font-semibold mb-4">Update Category</h2>
             
             <label className="block mb-2">
                Category Name:

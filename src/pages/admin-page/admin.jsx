@@ -17,11 +17,12 @@ import UpdateCategoryForm from "../admin/UpdateCategoryForm/updateCategory";
 import AddGalleryItemForm from "../admin/AddGalleryForm/addGalleryForm";
 import UpdateGalleryForm from "../admin/UpdateGalleryForm/updateGalleryForm";
 import AddRooms from "../admin/AddRoomPage/AddRoom";
+import UpdateRoom from "../admin/rooms/updateRoomForm";
 export default function AdminPage(){
     return(<>
       <div className="w-full max-h-[100vh] overflow-hidden overflow-y-hidden flex">
 
-      <div className="w-[30%] bg-blue-400 h-[100vh] flex flex-col"> 
+      <div className="w-[30%] bg-blue-600 h-[100vh] flex flex-col"> 
 
        <div className="text-white text-[30px] text-center hover:font-bold hover:text-black flex justify-start items-center px-4"><Link to={"/admin/bookings"} className="flex items-center gap-2">  <CiBookmarkCheck /> Bookings</Link></div>
     
@@ -38,7 +39,7 @@ export default function AdminPage(){
 
 
      
-     <div className="bg-blue-900 w-full max-h-[100vh] overflow-y-scroll">
+     <div className="bg-blue-100 w-full max-h-[100vh] overflow-y-scroll">
        <Routes path="/*">
         <Route path="/bookings" element={<AdminBooking/>}/>
         <Route path="/categories" element={<AdminCategories/>}/>
@@ -51,6 +52,7 @@ export default function AdminPage(){
         <Route path="/add-gallery-item" element={<AddGalleryItemForm/>}/>
         <Route path="/update-gallery-item" element={<UpdateGalleryForm/>}/>
         <Route path="/add-rooms" element={<AddRooms/>}/>
+        <Route path="/update-rooms" element={<UpdateRoom/>}/>
        </Routes>
 
      </div>
@@ -59,3 +61,4 @@ export default function AdminPage(){
       </div>
     </>);
 }
+
