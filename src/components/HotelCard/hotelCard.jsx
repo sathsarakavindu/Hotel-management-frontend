@@ -22,6 +22,7 @@ export default function HotelCard(props) {
         }
        }).then((result)=>{
         const feedbackValues = {
+          Feedback_id: 2,
           User_id: result.data.user.id,
           User_name: result.data.user.firstName,
           Room_id: hotel.room_id,
