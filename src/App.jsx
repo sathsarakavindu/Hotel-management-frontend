@@ -12,7 +12,7 @@ import About from "./pages/client-page/about"
 import CategoriesPage from "./pages/client-page/category"
 import SignUp from "./pages/register/signup"
 import FilteredCategory from "./pages/client-page/filteredCategory"
-import AddRooms from "./pages/admin/AddRoomPage/AddRoom"
+
 import AddBooking from "./pages/client-page/addBookings"
 
 function App() {

@@ -11,13 +11,14 @@ export default function Feedback() {
   useEffect(() => {
     if (!isLoading) {
       axios
-        .get(import.meta.env.VITE_BACKEND_URL + "/api/add-feedback", {
+        .get(import.meta.env.VITE_BACKEND_URL + "/api/add-feedback/get-approved-feedback", {
           headers: {
             Authorization: "Bearer " + token,
           },
         })
         .then((results) => {
-          setFeedback(results.data.result);
+          console.log(results.data.results);  
+          setFeedback(results.data.results);
           setLoading(true);
         })
         .catch((err) => {
@@ -43,7 +44,7 @@ export default function Feedback() {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-gray-50">
+    <div className="w-full min-h-[70px] flex flex-col bg-gray-50">
       <div className="w-full p-4 flex-grow">
         <h1 className="text-center text-black font-bold text-3xl mb-6">
           Feedback

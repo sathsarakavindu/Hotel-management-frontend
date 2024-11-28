@@ -1,5 +1,6 @@
 import { Footer } from '../../components/footer/footer';
 import Header from './../../components/header/header';
+import Gallery from './galleryView';
 import Feedback from './view_feedback';
 export default function HomePage(){
     return(
@@ -23,6 +24,7 @@ export default function HomePage(){
   </div>
 </div>
 <Feedback/>
+<Gallery/>
 <Footer/>
 </>
 );

@@ -6,14 +6,32 @@ export default function HotelCard(props) {
   const { hotel, categoryPrice } = props;
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [countFeedback, setFeddbackCount] = useState(0);
 
   const token = localStorage.getItem("token");
 
-  const handleFeedbackSubmit = () => {
+  const getFeedbackCount = () =>{
+
+    axios.get(import.meta.env.VITE_BACKEND_URL + '/api/add-feedback/feedback-count').
+    then((count)=>{
+      console.log("Count "+ count.data.count);
+      setFeddbackCount(count.data.count);
+    }).
+    catch((err)=>{
+      console.log(err);
+    });
+
+  }
+
+
+
+  const handleFeedbackSubmit =  () => {
     // toast.success("Feedback submitted!");
     // setShowFeedback(false);
     // console.log(`Feedback for ${hotel.room_name}:`, feedback);
     if(token != null){
+
+      getFeedbackCount();
 
        axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users/',{
         headers:{
@@ -22,7 +40,7 @@ export default function HotelCard(props) {
         }
        }).then((result)=>{
         const feedbackValues = {
-          Feedback_id: 2,
+          Feedback_id: countFeedback + 1,
           User_id: result.data.user.id,
           User_name: result.data.user.firstName,
           Room_id: hotel.room_id,
