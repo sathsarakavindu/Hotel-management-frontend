@@ -9,29 +9,65 @@ import { Footer } from "../../../components/footer/footer";
 export default function Users() {
   const [userList, setUserList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
 
   const token = localStorage.getItem("token");
   if (token == null) {
     window.location.href = "/login";
   }
 
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     axios
+  //       .post(import.meta.env.VITE_BACKEND_URL + "/api/users/all-users", {
+  //         headers: {
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       })
+  //       .then((results) => {
+  //         setUserList(results.data.result);
+  //         setIsLoading(true);
+  //       })
+  //       .catch((err) => {
+  //         console.error("Error: " + err);
+  //       });
+  //   }
+  // }, [isLoading]);
+
+
   useEffect(() => {
+    const page = 1; // Example: Set the initial page number
+    const pageSize = 10; // Example: Set the initial page size
+  
     if (!isLoading) {
       axios
-        .post(import.meta.env.VITE_BACKEND_URL + "/api/users/all-users", {
-          headers: {
-            Authorization: "Bearer " + token,
+        .post(
+          import.meta.env.VITE_BACKEND_URL + "/api/users/all-users",
+          {
+            page: page,
+            pageSize: pageSize, // Include page number and size in the request body
           },
-        })
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
         .then((results) => {
-          setUserList(results.data.result);
+          setUserList(results.data.users);
+          setTotalPage(results.data.pagination.totalPages)
+          console.log( "totla pages " + results.data.pagination.totalPages);
           setIsLoading(true);
         })
         .catch((err) => {
           console.error("Error: " + err);
         });
     }
-  }, [isLoading]);
+  }, [isLoading, page]);
+  
+
+
 
   const disableAccount = async (email) => {
     const changedData = { email };
@@ -68,6 +104,8 @@ export default function Users() {
         console.error(err);
       });
   };
+
+  console.log(userList.length);
 
   return (
     <div className="w-full min-h-screen bg-gray-50 flex flex-col">
@@ -115,6 +153,20 @@ export default function Users() {
               ))}
             </tbody>
           </table>
+          <div className="w-full flex justify-center items-center">
+           {  Array.from({length: totalPage}).map((
+              item, index)=>{
+                return(
+                  <button className={`bg-blue-500 mx-[10px]
+                  w-[20px] h-[20px] flex
+                  text-center justify-center items-center
+                  text-white ${page == (index+1) && " border border-black"}
+                  `} onClick={()=>{setPage(index + 1)}}>
+                    {index + 1}
+                  </button>
+                )
+              })}
+          </div>
         </div>
       </div>
       <Footer />
