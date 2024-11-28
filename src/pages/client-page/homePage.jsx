@@ -1,15 +1,7 @@
-
-
 import { Footer } from '../../components/footer/footer';
 import Header from './../../components/header/header';
-
-
-
-
-
-
+import Feedback from './view_feedback';
 export default function HomePage(){
-
     return(
     <>
          <Header/>
@@ -30,6 +22,7 @@ export default function HomePage(){
 </select>
   </div>
 </div>
+<Feedback/>
 <Footer/>
 </>
 );
