@@ -28,7 +28,7 @@ export default function LoginPage(){
                 window.location.href = "/"
   
               }else if(res.data.user.type == "admin"){
-                  window.location.href = "/admin"
+                  window.location.href = "/admin/bookings"
               }
             }
            else if(res.data.user.disabled == true){

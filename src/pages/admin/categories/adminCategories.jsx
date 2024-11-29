@@ -337,7 +337,7 @@ export default function AdminCategories() {
           </button>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full border border-gray-300 bg-white shadow-md rounded-lg">
+          <table className="w-full table-auto border border-gray-300 rounded-lg shadow-lg overflow-hidden bg-white">
             <thead>
               <tr className="bg-gray-800 text-white text-left">
                 <th className="border border-gray-300 px-4 py-2">Category Name</th>

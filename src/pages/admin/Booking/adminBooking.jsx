@@ -122,6 +122,7 @@
 // }
 
 
+
  import { useEffect, useState } from "react";
 import { Footer } from "../../../components/footer/footer";
  import Header from "../../../components/header/header";
@@ -210,7 +211,7 @@ export default function AdminBooking() {
           <h1 className="text-3xl font-semibold text-gray-800">Bookings</h1>
         </div>
         <div className="flex-grow overflow-x-auto px-4 sm:px-6 lg:px-8">
-          <table className="table-auto w-full bg-white shadow-md rounded-lg border border-gray-200">
+          <table className="w-full table-auto border border-gray-300 rounded-lg shadow-lg overflow-hidden bg-white">
             <thead className="bg-gray-800 text-white">
               <tr>
                 <th className="px-4 py-2 text-left">Booking ID</th>

@@ -202,7 +202,7 @@ export default function GalleryItems() {
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-semibold">Gallery Items</h2>
                     <button
-                        className="bg-green-500 hover:bg-green-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+                        className="bg-red-500 hover:bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
                         onClick={handleAddNew}
                         title="Add New Item"
                     >
@@ -210,7 +210,7 @@ export default function GalleryItems() {
                     </button>
                 </div>
                 <div className="overflow-x-auto">
-                    <table className="table-auto w-full border-collapse bg-white shadow rounded-lg">
+                    <table className="w-full table-auto border border-gray-300 rounded-lg shadow-lg overflow-hidden bg-white">
                         <thead>
                             <tr className="bg-gray-800 text-white">
                                 <th className="px-4 py-2 text-left">Item Name</th>
