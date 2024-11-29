@@ -297,15 +297,24 @@ export default function AdminRooms() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Header */}
       <Header />
 
       {/* Main Content */}
-      <div className="flex-1 p-4">
+      <div className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex items-center justify-between mb-6">
         <h2 className="text-gray-800 text-3xl font-bold mb-4 text-center">
           Admin Rooms
         </h2>
+        <button
+            className="bg-red-500 w-12 h-12 rounded-full text-white flex items-center justify-center shadow-lg hover:bg-red-600"
+            onClick={addRooms}
+            title="Add New Room"
+          >
+            <FaPlus />
+          </button>
+          </div>
         <table className="w-full table-auto border border-gray-300 rounded-lg shadow-lg overflow-hidden bg-white">
           <thead>
             <tr className="bg-gray-800 text-white">
@@ -369,12 +378,16 @@ export default function AdminRooms() {
         </table>
 
         {/* Floating Add Button */}
-        <button
-          className="bg-blue-500 text-white fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg flex items-center justify-center hover:bg-blue-700 transition-all"
+        {/* <button
+          className="bg-red-500 text-white fixed bottom-4 right-4 w-16 h-16 rounded-full shadow-lg flex items-center justify-center hover:bg-red-600 transition-all"
           onClick={addRooms}
         >
           <FaPlus size={20} />
-        </button>
+        </button> */}
+
+
+
+
       </div>
 
       {/* Footer */}

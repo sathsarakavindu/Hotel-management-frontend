@@ -1,12 +1,30 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function HotelCard(props) {
   const { hotel, categoryPrice } = props;
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showBookingPopup, setShowBookingPopup] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [countFeedback, setFeddbackCount] = useState(0);
+  const [formData, setFormData] = useState({
+    roomId: hotel.room_id || "",
+    category: hotel.room_category,
+    email: "",
+    start: "",
+    end: "",
+    notes: "",
+    status: "pending",
+  });
+  const navigate = useNavigate();
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const token = localStorage.getItem("token");
 
@@ -23,6 +41,37 @@ export default function HotelCard(props) {
 
   }
 
+  const handleBookingSubmit = () => {
+
+       if(token == null){
+        navigate('/login');
+        return;
+       }
+
+       axios.post(import.meta.env.VITE_BACKEND_URL + "/api/booking/addBooking", formData,{
+        headers:{
+          Authorization: "Bearer " + token
+        }
+       }).then((values)=>{
+        toast.success("Booking saved successfully!");
+       }).catch((err)=>{
+         console.log(err);
+       });
+
+
+
+
+    // Perform booking logic here
+    console.log("Booking Data:", formData);
+    setShowBookingPopup(false);
+    toast.success("Booking successfully submitted!");
+  };
+
+
+
+  const bookSubmit = () => {
+    setShowBookingPopup(true); // Show the popup card
+  };
 
 
   const handleFeedbackSubmit =  () => {
@@ -54,10 +103,6 @@ export default function HotelCard(props) {
           Authorization: "Bearer " + token
          }
         }).then((values)=>{
-          // result.status(200).json({
-          //   message: "Feedback Successfully Added.", 
-          //   result: values
-          // });
           toast.success("Feedback successfully added..!");
           console.log(values);
         }).catch((err)=>{
@@ -139,7 +184,8 @@ else{
 
         {/* Action Buttons */}
         <div className="flex justify-between mt-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200" onClick={
+            bookSubmit}>
             Book Now
           </button>
           <button
@@ -178,6 +224,119 @@ else{
                 Submit
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+            {/* Booking Popup */}
+            {showBookingPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white w-[400px] rounded-lg shadow-lg p-6">
+            <h2 className="text-lg font-bold mb-4">Book Your Stay</h2>
+            <form className="space-y-4">
+              <div>
+                <label htmlFor="roomId" className="block text-gray-700 font-medium">
+                  Room ID
+                </label>
+                <input
+                  type="text"
+                  id="roomId"
+                  name="roomId"
+                  value={formData.roomId}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  readOnly
+                />
+              </div>
+              <div>
+                <label htmlFor="category" className="block text-gray-700 font-medium">
+                  Category
+                </label>
+                <input
+                  type="text"
+                  id="category"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter category"
+                  readOnly
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-gray-700 font-medium">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter email"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="start" className="block text-gray-700 font-medium">
+                  Start Date
+                </label>
+                <input
+                  type="date"
+                  id="start"
+                  name="start"
+                  value={formData.start}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="end" className="block text-gray-700 font-medium">
+                  End Date
+                </label>
+                <input
+                  type="date"
+                  id="end"
+                  name="end"
+                  value={formData.end}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="notes" className="block text-gray-700 font-medium">
+                  Notes
+                </label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows="3"
+                  placeholder="Add any additional notes"
+                ></textarea>
+              </div>
+              <div className="flex justify-end space-x-4">
+                <button
+                  type="button"
+                  className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-200"
+                  onClick={() => setShowBookingPopup(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-200"
+                  onClick={handleBookingSubmit}
+                >
+                  Book
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

@@ -14,6 +14,8 @@ import SignUp from "./pages/register/signup"
 import FilteredCategory from "./pages/client-page/filteredCategory"
 
 import AddBooking from "./pages/client-page/addBookings"
+import OTPVerificationPage from "./pages/client-page/OTPVerificatioPage"
+import BookNow from "./pages/client-page/bookNow"
 
 function App() {
  
@@ -27,6 +29,7 @@ function App() {
    
    <Route path="/admin/*" element={<AdminPage/>}/>
    <Route path="/login" element={<LoginPage/>}/>
+   <Route path="/otp-verification" element={<OTPVerificationPage/>}/>
    <Route path="/categories" element={<CategoriesPages/>}/>
     <Route path="/test" element={<UploadComponent/>}/>
     <Route path="/*" element={<HomePage/>}/>
@@ -36,6 +39,7 @@ function App() {
     <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/filtered-category" element={<FilteredCategory/>}></Route>
     <Route path='/add-booking' element={<AddBooking/>}/>
+    <Route path="/booking-now" element={<BookNow/>}/>
    </Routes>
    </BrowserRouter>
   )

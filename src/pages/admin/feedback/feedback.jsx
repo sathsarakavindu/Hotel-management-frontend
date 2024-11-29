@@ -78,7 +78,7 @@ export default function AdminFeedback() {
         <h1 className="flex m-4 items-center justify-center text-black font-bold text-2xl">
           Feedback
         </h1>
-        <table className="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
+        <table className="w-full table-auto border border-gray-300 rounded-lg shadow-lg overflow-hidden bg-white">
           <thead>
             <tr className="bg-gray-800 text-white">
               <th className="px-4 py-2 text-left border">Feedback Id</th>

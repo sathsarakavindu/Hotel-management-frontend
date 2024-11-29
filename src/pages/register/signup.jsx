@@ -171,8 +171,9 @@ export default function SignUp() {
       );
       toast.success("Successfully registered..!");
       console.log("User registered successfully:", response.data);
-      // Navigate to the login page after successful registration
-      navigate("/login");
+     
+     
+      navigate('/otp-verification', {state: {email}})
     } catch (error) {
       console.error("Error during user registration:", error);
       alert("Registration failed. Please try again.");
