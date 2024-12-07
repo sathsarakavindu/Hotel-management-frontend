@@ -16,9 +16,29 @@ export default function AddBooking() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  if (token == null) {
-    navigate("/login");
-    return;
+  // if (token == null) {
+  //   navigate("/login");
+  //   return;
+  // }
+  // if (token == null || isTokenExpired(token)) {
+  //   navigate("/login");
+  //   return;
+  // }
+
+ function isTokenExpired(token) {
+    try {
+      // Decode the token payload
+      const payload = JSON.parse(atob(token.split(".")[1]));
+  
+      // Get the current timestamp
+      const currentTime = Math.floor(Date.now() / 1000);
+  
+      // Check if the token is expired
+      return currentTime >= payload.exp;
+    } catch (error) {
+      console.error("Invalid token:", error);
+      return true; // Treat invalid tokens as expired
+    }
   }
 
   const [formData, setFormData] = useState({
@@ -33,6 +53,11 @@ export default function AddBooking() {
 
   useEffect(() => {
     if (!isLoading) {
+      if (token == null || isTokenExpired(token)) {
+        navigate("/login");
+        return;
+      }
+
       getUserInfo();
       axios
         .get(import.meta.env.VITE_BACKEND_URL + "/api/category/all-categories")

@@ -39,9 +39,9 @@ export default function HomePage() {
         </h1>
 
         {/* Premium Square Button */}
-        <button
-          className="bg-gradient-to-r from-blue-500 to-green-500 text-white text-[18px] w-[120px] h-[60px] rounded-xl font-semibold shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-10 relative z-10"
-        >
+        <button className="bg-gradient-to-r from-blue-500 to-green-500 text-white text-[18px] w-[120px] h-[60px] rounded-xl font-semibold shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-10 relative z-10" onClick={()=>{
+          window.location.href = "/add-booking"
+        }}>
           Book Now
         </button>
       </div>
