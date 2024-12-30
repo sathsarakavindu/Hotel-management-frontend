@@ -46,7 +46,7 @@ export default function Feedback() {
   return (
     <div className="w-full min-h-[70px] flex flex-col bg-gray-50">
       <div className="w-full p-4 flex-grow">
-        <h1 className="text-center text-black font-bold text-3xl mb-6">
+        <h1 className="text-center text-black font-extrabold text-4xl mb-6">
           Feedback
         </h1>
 
